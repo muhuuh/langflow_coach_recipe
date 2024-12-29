@@ -1,3 +1,4 @@
+# Note: Replace **<YOUR_APPLICATION_TOKEN>** with your actual Application token
 import requests
 import os
 from dotenv import load_dotenv
@@ -8,14 +9,14 @@ load_dotenv()
 
 BASE_API_URL = "https://api.langflow.astra.datastax.com"
 LANGFLOW_ID = "baf5b460-1478-4a11-90c7-84a4ea5036c6"
-FLOW_ID = "982d4184-8457-46c2-b2e1-ab85051a7446"
+FLOW_ID = "0ccc02d1-e1bc-4350-9770-00d7793b9dcf"
 APPLICATION_TOKEN = os.environ.get("APP_TOKEN")
-ENDPOINT = "customer_test" # The endpoint name of the flow
+ENDPOINT = "" # The endpoint name of the flow
 
 
 def run_flow(message: str) -> dict:
    
-    api_url = f"{BASE_API_URL}/lf/{LANGFLOW_ID}/api/v1/run/{ENDPOINT}"
+    api_url = f"{BASE_API_URL}/lf/{LANGFLOW_ID}/api/v1/run/{FLOW_ID}"
 
     payload = {
         "input_value": message,
@@ -42,7 +43,7 @@ def main():
             response = response["outputs"][0]["outputs"][0]["results"]["message"]["text"]
             st.markdown(response)
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            st.error(f"An error occurred: {e} {response}")
 
 if __name__ == "__main__":
     main()
